@@ -1,5 +1,18 @@
-<h2>本のタイトル</h2>
-<p><%= @book.title %></p>
 
-<h2>感想</h2>
-<p><%= @book.body %></p>
+
+<div class="section">
+    <div class="notice">
+         <% if flash[:notice] =="投稿が成功しました" or flash[:notice] =="編集が成功しました" %>
+            <p style="color:green"><%= flash[:notice] %></p>
+        <% else %>
+            <p style="color:red"><%= flash[:notice] %></p>
+        <% end %>
+    </div>
+    <h2 class="subheadline">本の詳細</h2>
+    <p>本のタイトル：<%= @book.title %><p>
+
+    <p>感想：<%= @book.body %></p>
+
+    <%= link_to "編集", edit_book_path(@book.id) %>
+    <%= link_to "戻る", "/books" %> 
+</div>
