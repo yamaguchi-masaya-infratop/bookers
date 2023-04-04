@@ -2,17 +2,17 @@
 
 <div class="section">
     <div class="notice">
-         <% if flash[:notice] =="投稿が成功しました" or flash[:notice] =="編集が成功しました" %>
+         <% if flash[:notice] =="Book was successfully created" or flash[:notice] =="Book was successfully editted" %>
             <p style="color:green"><%= flash[:notice] %></p>
-        <% else %>
+        <% elsif flash[:notice] == "Edit was unsuccessful" %>
             <p style="color:red"><%= flash[:notice] %></p>
         <% end %>
     </div>
-    <h2 class="subheadline">本の詳細</h2>
-    <p>本のタイトル：<%= @book.title %><p>
+    <h2 class="subheadline">Show Book</h2>
+    <p>Title：<%= @book.title %><p>
 
-    <p>感想：<%= @book.body %></p>
+    <p>Body：<%= @book.body %></p>
 
-    <%= link_to "編集", edit_book_path(@book.id) %>
-    <%= link_to "戻る", "/books" %> 
+    <%= link_to "Edit", edit_book_path(@book.id) %>
+    <%= link_to "Back", "/books" %> 
 </div>

@@ -2,11 +2,11 @@ class BooksController < ApplicationController
   def create 
     @book = Book.new(book_params)
     if @book.save
-      flash[:notice] = "投稿が成功しました"
+      flash[:notice] = "Book was successfully created"
       redirect_to book_path(@book.id)
     else
       @books = Book.all
-      flash[:notice] = "投稿が失敗しました"
+      flash[:notice] = "Creation was unsuccessful"
       render :index
     end
   end
@@ -27,11 +27,11 @@ class BooksController < ApplicationController
   def update 
     @book = Book.find(params[:id])
     if @book.update(book_params) 
-      flash[:notice] = "編集が成功しました"
+      flash[:notice] = "Book was successfully editted"
       redirect_to book_path(@book.id)
     else
       @book = Book.find(params[:id])
-      flash[:notice] = "編集が失敗しました"
+      flash[:notice] = "Edit was unsuccessful"
       render :edit
     end
   end
@@ -39,10 +39,10 @@ class BooksController < ApplicationController
   def destroy 
     book = Book.find(params[:id])
     if book.destroy
-      flash[:notice] = "削除が成功しました"
+      flash[:notice] = "Book was successfully destroyed"
       redirect_to '/books'
     else 
-      flash[:notice] = "削除が失敗しました"
+      flash[:notice] = "Deletion was unsuccessful"
       render :index
     end
   end

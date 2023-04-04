@@ -34,6 +34,10 @@ nav {
     border-bottom: solid 5px #000000;
 }
 
+ul {
+    list-style: none;
+}
+
 .nav-list {
     text-align: center;
     padding: 10px 0;

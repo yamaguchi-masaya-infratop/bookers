@@ -1,17 +1,10 @@
 <div class="section">
-    <div class="notice">
-        <% if flash[:notice] == "投稿が失敗しました" or flash[:notice] == "削除が失敗しました"%>
-            <p style="color:red"><%= flash[:notice] %></p>
-        <% elsif flash[:notice] == "削除が成功しました" %>
-            <p style="color:green"><%= flash[:notice] %></p>
-        <% end %>
-    </div>
     <h2 class="subheadline">Books</h2>
     <table class="table-box">
         <thead>
             <tr>
-                <th id="th-title">本のタイトル</th>
-                <th>感想</th>
+                <th id="th-title">Title</th>
+                <th>Body</th>
                 <th id="th-extra" colspan="3"></th>
             </tr>
         </thead>
@@ -20,23 +13,40 @@
                 <tr>
                     <td><%= book.title %></td>
                     <td><%= book.body %></td>
-                    <td><%= link_to "詳細", book_path(book.id) %></td>
-                    <td><%= link_to "編集", edit_book_path(book.id) %></td>
-                    <td><%= link_to "削除", book_path(book.id), method: :delete, "data-confirm" =>"本当に削除しますか？" %></td>
+                    <td><%= link_to "Show", book_path(book.id) %></td>
+                    <td><%= link_to "Edit", edit_book_path(book.id) %></td>
+                    <td><%= link_to "Destroy", book_path(book.id), method: :delete, "data-confirm" =>"Do you really want to delete this book?" %></td>
                 </tr>
             <% end %>
         </tbody>
     </table>
 </div>
+
 <div class="section">
-    <h2 class="subheadline">New</h2>
+    <div class="notice">
+        <% if flash[:notice] == "Creation was unsuccessful" or flash[:notice] == "Deletion was unsuccessful" %>
+            <p style="color:red"><%= flash[:notice] %></p>
+            <% if @book.errors.any? %>
+                <p style="color:red"><%= @book.errors.count %> cases of errors occurred</p>
+                <ul>
+                    <% @book.errors.full_messages.each do |message| %>
+                        <li style="color:red"><%= message %></li>
+                    <% end %>
+                </ul>
+            <% end %>
+        <% elsif flash[:notice] == "Book was successfully destroyed" %>
+            <p style="color:green"><%= flash[:notice] %></p>
+        <% end %>
+        
+    </div>
+    <h2 class="subheadline">New Book</h2>
     <div>
         <%= form_with model: @book, url: '/books', method: :post do |f| %>
-            <h4>本のタイトル</h4>
+            <h4>Title</h4>
             <%= f.text_field :title %>
-            <h4>感想</h4>
+            <h4>Body</h4>
             <%= f.text_area :body %>
-            <p><%= f.submit '投稿' %></p>
+            <p><%= f.submit 'Create Book' %></p>
         <% end %>
     </div>
 </div>
