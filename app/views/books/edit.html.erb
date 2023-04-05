@@ -1,20 +1,20 @@
 <div class="section">
-    <div class="notice">
-         <% if flash[:notice] =="Book was successfully created" or flash[:notice] =="Book was successfully editted" %>
+    
+    <div class="notice"> 
+        <% if flash[:notice] =="Book was successfully created" or flash[:notice] =="Book was successfully editted" %>
             <p style="color:green"><%= flash[:notice] %></p>
         <% elsif flash[:notice] == "Edit was unsuccessful" %>
             <p style="color:red"><%= flash[:notice] %></p>
             <% if @book.errors.any? %>
-                <p style="color:red"><%= @book.errors.count %> cases of errors occurred</p>
+                <p style="color:red"><%= pluralize(@book.errors.count, "error") %> occurred</p>
                 <ul>
                     <% @book.errors.full_messages.each do |message| %>
                         <li style="color:red"><%= message %></li>
                     <% end %>
                 </ul>
             <% end %>
-        <% end %>
-        
-    </div>
+        <% end %>    
+    </div> 
     <h2 class="subheadline">Editing Book</h2>
     <%= form_with model: @book do |f| %>
         <h4>Title</h4>
@@ -23,6 +23,6 @@
         <%= f.text_area :body %>
         <p><%= f.submit 'Update Book' %></p>
         <%= link_to "Show", book_path(@book.id) %>
-        <%= link_to "Back", "/books" %> 
+        <%= link_to "Back", books_path %> 
     <% end %>
 </div>

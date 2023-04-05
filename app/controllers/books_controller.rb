@@ -21,6 +21,7 @@ class BooksController < ApplicationController
   end
 
   def edit
+    @book = Book.new
     @book = Book.find(params[:id])
   end
   
@@ -30,7 +31,6 @@ class BooksController < ApplicationController
       flash[:notice] = "Book was successfully editted"
       redirect_to book_path(@book.id)
     else
-      @book = Book.find(params[:id])
       flash[:notice] = "Edit was unsuccessful"
       render :edit
     end

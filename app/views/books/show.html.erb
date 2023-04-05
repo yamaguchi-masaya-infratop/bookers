@@ -4,8 +4,17 @@
     <div class="notice">
          <% if flash[:notice] =="Book was successfully created" or flash[:notice] =="Book was successfully editted" %>
             <p style="color:green"><%= flash[:notice] %></p>
+            
         <% elsif flash[:notice] == "Edit was unsuccessful" %>
             <p style="color:red"><%= flash[:notice] %></p>
+            <% if @book.errors.any? %>
+                <p style="color:red"><%= @book.errors.count %> cases of errors occurred</p>
+                <ul>
+                    <% @book.errors.full_messages.each do |message| %>
+                        <li style="color:red"><%= message %></li>
+                    <% end %>
+                </ul>
+            <% end %>
         <% end %>
     </div>
     <h2 class="subheadline">Show Book</h2>

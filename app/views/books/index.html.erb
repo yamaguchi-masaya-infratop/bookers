@@ -27,7 +27,7 @@
         <% if flash[:notice] == "Creation was unsuccessful" or flash[:notice] == "Deletion was unsuccessful" %>
             <p style="color:red"><%= flash[:notice] %></p>
             <% if @book.errors.any? %>
-                <p style="color:red"><%= @book.errors.count %> cases of errors occurred</p>
+                <p style="color:red"><%= pluralize(@book.errors.count, "error") %> occurred</p>
                 <ul>
                     <% @book.errors.full_messages.each do |message| %>
                         <li style="color:red"><%= message %></li>
